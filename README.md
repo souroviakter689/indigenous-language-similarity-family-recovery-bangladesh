@@ -204,33 +204,26 @@ The results are exploratory and should not be interpreted as definitive linguist
 
 The following results summarize the reported main experiments.
 
-### 1. Clustering Performance and Stability
+### 1. Clustering Performance and Reproducibility
 
-The Adjusted Rand Index (ARI) was used to evaluate clustering
-agreement with the reference labels used in the analysis.
+| Model | Reported ARI | Reproducibility |
+|---|---:|---|
+| Skip-gram | 0.6067 (single run) | High variability across runs |
+| CBOW | 0.6067 | Stable across logged conditions |
+| Corrected edit-distance baseline | 0.3000 | Baseline comparison |
 
-| Method | Reported ARI |
-|---|---:|
-| Word2Vec Skip-gram | 0.6067 |
-| Word2Vec CBOW | 0.6067 |
-| Corrected edit-distance baseline | 0.3000 |
+Multi-seed and thread-condition experiments revealed substantial
+reproducibility differences between the two Word2Vec architectures.
 
-Both Word2Vec architectures achieved a reported ARI of 0.6067
-in the main clustering experiment. However, the same ARI value
-does not imply equivalent stability across random seeds.
+Across 39 logged observations, Skip-gram ARI values ranged from
+approximately 0.24 to 0.61, whereas CBOW consistently achieved
+an ARI of 0.607 (SD = 0.000).
 
-**Stability consideration:** Skip-gram exhibited seed sensitivity
-in the cluster-count experiments. Its intermediate-k results
-should therefore be interpreted cautiously and should not be
-assumed to generalize across random seeds.
+Under the evaluated conditions, CBOW provides the more reliable
+basis for interpreting the clustering results. The high single-run
+ARI obtained by Skip-gram should be interpreted cautiously because
+it was sensitive to initialization and training conditions.
 
-CBOW was expected to be more stable in the reported analysis;
-however, this interpretation should be supported by explicit
-multi-seed evaluation before making a definitive stability claim.
-
-The ARI values represent agreement with the selected reference
-labels and do not independently establish genealogical language
-relationships.
 ### 2. Selected Similarity Findings
 
 The following pairs were reported in the main similarity analysis.
