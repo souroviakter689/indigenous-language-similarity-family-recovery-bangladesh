@@ -2,7 +2,6 @@
 
 ### A Word2Vec-Based Study of Language Similarity and Potential Family Recovery
 
-**Author:** Sourovi Akter
 
 ## Overview
 
@@ -173,11 +172,6 @@ This is the intended structure. Keep only filenames that actually exist in the r
 
 The main analysis script is `ids_project.R`. To rerun the analysis, prepare the input dataset locally and update the script's input path as needed. The raw dataset is not included in this repository, so results cannot be reproduced from the public repository alone.
 
-## Citation
-
-If you use or refer to this project, cite it as:
-
-> Akter, Sourovi. *Exploratory Indigenous Language Similarity Analysis in Bangladesh: A Word2Vec-Based Study of Language Similarity and Potential Family Recovery.* GitHub repository.
 
 ## Author
 
