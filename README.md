@@ -31,9 +31,7 @@ The project constructs language-level vector representations from Word2Vec word 
 
 The main objective is to investigate whether different embedding architectures reveal consistent patterns of linguistic similarity and clustering among the selected languages.
 
-> **Important:** Computational similarity does not, by itself, establish genealogical language-family relationships. The findings should be interpreted as exploratory evidence that requires linguistic validation.
 
----
 
 ## 🎯 Project Objectives
 
