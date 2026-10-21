@@ -1,80 +1,32 @@
-# Indigenous Language Similarity and Family Recovery in Bangladesh
+# Exploratory Indigenous Language Similarity Analysis in Bangladesh
 
-### A Word2Vec-Based Computational Analysis of Indigenous Languages
+### A Word2Vec-Based Study of Language Similarity and Potential Family Recovery
 
-This project explores potential linguistic relationships among indigenous languages of Bangladesh using Word2Vec embeddings, cosine similarity, hierarchical clustering, and comparative lexical analysis.
+**Author:** Sourovi Akter
 
-The study investigates how computational language representations can help identify patterns of similarity among indigenous languages and their relationships with Bangla and English.
+## Overview
 
-The project compares two Word2Vec architectures—Skip-gram and Continuous Bag of Words (CBOW)—to examine language-level similarity patterns and clustering behavior.
+This project explores potential similarity patterns among eight Indigenous languages of Bangladesh using Word2Vec embeddings, cosine similarity, hierarchical clustering, and a lexical edit-distance baseline. Bangla and English are included as reference languages.
 
----
+The analysis is exploratory. Computational similarity alone cannot establish linguistic ancestry or definitively classify languages into language families.
 
-## 📌 Project Overview
+## Languages
 
-Bangladesh is home to several indigenous language communities with distinct linguistic and cultural identities. Understanding the relationships among these languages is important for linguistic research, language documentation, and the preservation of linguistic diversity.
+- **Indigenous languages:** Chakma, Marma, Garo, Kokborok, Santali, Khasi, Mro, and Hajong
+- **Reference languages:** Bangla and English
 
-This project applies computational techniques to explore similarities among eight indigenous languages of Bangladesh:
+## Dataset
 
-- Chakma
-- Marma
-- Garo
-- Kokborok
-- Santali
-- Khasi
-- Mro
-- Hajong
+The dataset was collected through web scraping and organized into sentence-level records.
 
-Bangla and English are also included as reference languages.
-
-The project constructs language-level vector representations from Word2Vec word embeddings and compares the resulting similarity structures.
-
-The main objective is to investigate whether different embedding architectures reveal consistent patterns of linguistic similarity and clustering among the selected languages.
-
-
-
-## 🎯 Project Objectives
-
-The main objectives are:
-
-1. Collect and organize sentence-level data for selected indigenous languages of Bangladesh.
-2. Develop a preprocessing pipeline for multilingual text data.
-3. Train Word2Vec models using Skip-gram and CBOW architectures.
-4. Construct language-level vector representations from word embeddings.
-5. Calculate pairwise cosine similarity between language representations.
-6. Apply hierarchical clustering to explore language groupings.
-7. Compare embedding-based similarity with a lexical edit-distance baseline.
-8. Investigate relationships between computational similarity patterns and potential linguistic or geographical factors.
-
----
-
-## 🌐 Languages Included
-
-| Category | Languages |
-|---|---|
-| Reference languages | Bangla, English |
-| Indigenous languages | Chakma, Marma, Garo, Kokborok, Santali, Khasi, Mro, Hajong |
-
-The analysis focuses on the eight selected indigenous languages, with Bangla and English serving as reference languages.
-
----
-
-## 📊 Dataset Overview
-
-The dataset was compiled through web scraping and organized for computational language analysis.
-
-### Dataset Statistics
-
-| Description | Count |
+| Dataset statistic | Count |
 |---|---:|
 | Raw records | 5,906 |
 | Records after cleaning | 5,842 |
 | Unique Bangla entries | 786 |
 | Unique English entries | 810 |
 
-### Indigenous Language Distribution
-
-| Language | Records |
+| Indigenous language | Records |
 |---|---:|
 | Chakma | 543 |
 | Garo | 736 |
@@ -85,226 +37,109 @@ The dataset was compiled through web scraping and organized for computational la
 | Mro | 697 |
 | Santali | 767 |
 
-These counts describe the dataset used in the reported analysis.
+The raw dataset is **not included** in this public repository. Before redistributing scraped data, users should check the source websites' terms and applicable permissions.
 
-### Dataset Structure
+## Methodology
 
-The dataset contains the following columns:
+1. Collect and organize multilingual text.
+2. Clean and normalize text and remove duplicates.
+3. Train Word2Vec models using **Skip-gram** and **CBOW**.
+4. Aggregate word embeddings into language-level representations.
+5. Calculate pairwise cosine similarities.
+6. Apply hierarchical clustering using average linkage, with three clusters in the main comparison.
+7. Compare embedding-based patterns with a lexical edit-distance baseline.
+8. Evaluate clustering agreement and compare similarity matrices using Mantel tests.
 
-| Column | Description |
-|---|---|
-| `Bangla` | Bangla-language text |
-| `English` | English-language text |
-| `Indigenous` | Indigenous-language text |
-| `Language` | Language label associated with the record |
-
-### Dataset Availability and Privacy
-
-The raw dataset is not included in this public repository.
-
-It was compiled through web scraping for this project. The dataset is kept separate from the public code repository, and its redistribution permissions must be considered before any public release.
-
-The repository provides the project code, selected result files, and visualizations without publishing the raw dataset.
-
----
-
-## ⚙️ Methodology
-
-The project follows a computational workflow consisting of data preparation, embedding generation, similarity analysis, clustering, and baseline comparison.
-
-### 1. Data Collection
-
-Sentence-level data were collected through web scraping and organized into a structured dataset containing reference-language text, indigenous-language text, and language labels.
-
-### 2. Data Preprocessing
-
-The preprocessing stage includes:
-
-- Text cleaning and normalization
-- Duplicate removal
-- Preparation of language-specific text
-- Extraction of unique reference-language entries
-- Organization of the corpus for embedding training
-
-The handling of non-ASCII characters is particularly important because several languages in the dataset use writing systems beyond basic ASCII.
-
-### 3. Word2Vec Embedding Generation
-
-Two Word2Vec architectures are investigated.
-
-#### Skip-gram
-
-Skip-gram learns to predict surrounding context words from a target word. It is evaluated for its ability to represent words based on their contextual relationships.
-
-#### Continuous Bag of Words (CBOW)
-
-CBOW predicts a target word from its surrounding context. Its resulting language-level representations are compared with those produced by Skip-gram.
-
-### Word2Vec Configuration
+### Main Word2Vec settings
 
 | Parameter | Value |
 |---|---:|
-| Vector dimensionality | 100 |
+| Vector dimension | 100 |
 | Context window | 5 |
 | Training iterations | 20 |
 | Minimum word count | 1 |
 | Random seed | 42 |
 
-These are the reported configuration settings for the main embedding experiments.
+Language-level vectors are formed by aggregating word embeddings. Results depend on corpus composition, text preprocessing, and how the embeddings are trained.
 
-### 4. Language-Level Representation
+## Results
 
-Word embeddings are aggregated to obtain language-level vector representations.
+### Clustering and baseline comparison
 
-These vectors are then used to compare languages within the trained embedding space.
-
-The interpretation of these representations depends on the corpus construction, preprocessing, and embedding-training procedure.
-
-### 5. Cosine Similarity Analysis
-
-Cosine similarity is used to measure the similarity between language-level vectors.
-
-The resulting pairwise similarity matrices are used to:
-
-- Examine language-level similarity patterns
-- Compare Skip-gram and CBOW
-- Identify highly similar language pairs
-- Generate similarity heatmaps
-
-### 6. Hierarchical Clustering
-
-Hierarchical clustering is applied to explore the grouping structure of the language representations.
-
-Average linkage is used in the reported main analysis, with three clusters selected for the primary clustering comparison.
-
-Dendrograms are generated to visualize the resulting hierarchical structures.
-
-### 7. Lexical Edit-Distance Baseline
-
-A lexical edit-distance baseline is included to provide a comparison with the embedding-based approach.
-
-This baseline provides a different perspective on similarity by examining textual differences rather than relying on Word2Vec representations.
-
-The corrected baseline implementation is used for the reported baseline comparison.
-
-### 8. Comparative Evaluation
-
-The project compares:
-
-- Skip-gram and CBOW similarity structures
-- Hierarchical clustering outcomes
-- Embedding-based similarity and the lexical baseline
-- Relationships between language similarity matrices
-
-The results are exploratory and should not be interpreted as definitive linguistic classifications without further validation.
-
----
-
-## 📈 Results
-
-The following results summarize the reported main experiments.
-
-### 1. Clustering Performance and Reproducibility
-
-| Model | Reported ARI | Reproducibility |
+| Method | Reported ARI | Interpretation |
 |---|---:|---|
-| Skip-gram | 0.6067 (single run) | High variability across runs |
-| CBOW | 0.6067 | Stable across logged conditions |
-| Corrected edit-distance baseline | 0.3000 | Baseline comparison |
+| Skip-gram | 0.6067 in the reported main run | Variable across logged training conditions |
+| CBOW | 0.6067 in the reported main run | Stable across logged conditions |
+| Corrected lexical edit-distance baseline | 0.3000 | Baseline comparison |
 
-Multi-seed and thread-condition experiments revealed substantial
-reproducibility differences between the two Word2Vec architectures.
+The Adjusted Rand Index (ARI) measures agreement between a clustering and a reference partition. Its interpretation depends on the reference labels used. The exact reference-label mapping should be checked in the analysis script before interpreting ARI as evidence of language-family recovery.
 
-Across 39 logged observations, Skip-gram ARI values ranged from
-approximately 0.24 to 0.61, whereas CBOW consistently achieved
-an ARI of 0.607 (SD = 0.000).
+### Reproducibility across training settings
 
-Under the evaluated conditions, CBOW provides the more reliable
-basis for interpreting the clustering results. The high single-run
-ARI obtained by Skip-gram should be interpreted cautiously because
-it was sensitive to initialization and training conditions.
+The reproducibility analysis pooled **39 logged observations per model** across the evaluated conditions.
 
-### 2. Selected Similarity Findings
+| Training setting | Skip-gram (Mean ± SD) | CBOW (Mean ± SD) |
+|---|---:|---:|
+| Multi-thread | 0.57 ± 0.12 | 0.607 ± 0.000 |
+| Single-thread, Run 1 | 0.27 ± 0.12 | 0.607 ± 0.000 |
+| Single-thread, Run 2 | 0.24 ± 0.00 | 0.607 ± 0.000 |
 
-The following pairs were reported in the main similarity analysis.
+Across the logged observations, Skip-gram showed greater variability, while CBOW remained consistent under the evaluated conditions. The three setting rows above are setting-specific summaries; they are not the full summary of all 39 observations. The observed stability does not establish that CBOW is universally better or linguistically more valid.
+
+### Selected similarity findings
 
 | Analysis | Reported finding |
 |---|---|
-| Skip-gram: closest reported indigenous-language pair | Garo–Mro, similarity 0.981 |
-| CBOW: closest reported indigenous-language pair | Marma–Khasi, similarity 0.970 |
-| Skip-gram: most similar to Bangla | Marma, similarity 0.3108 |
-| Skip-gram: most similar to English | Chakma, similarity 0.3723 |
+| Skip-gram: closest reported Indigenous-language pair | Garo–Mro (0.981) |
+| CBOW: closest reported Indigenous-language pair | Marma–Khasi (0.970) |
+| Skip-gram: most similar to Bangla | Marma (0.3108) |
+| Skip-gram: most similar to English | Chakma (0.3723) |
 
-These values are specific to the current dataset, preprocessing pipeline, and embedding configuration.
+These scores are specific to the dataset and modelling pipeline. High similarity does not, by itself, demonstrate shared ancestry.
 
-High similarity scores should not automatically be interpreted as evidence of common ancestry. Orthographic overlap, transcription conventions, corpus composition, and other methodological factors may influence the results.
+### Surface-similarity matrix comparison
 
-### 3. Similarity Matrix Comparison
-
-Pairwise similarity matrices were generated for both Skip-gram and CBOW.
-
-The matrices provide a basis for comparing the structures learned by the two architectures.
-
-The lexical edit-distance matrix is included as a baseline for comparison.
-
-### 4. Surface-Similarity Matrix Correlation
-
-Mantel tests were used to investigate the relationship between the embedding-derived similarity matrices and the surface-similarity matrix.
+Mantel tests compared the embedding-derived similarity matrices with a surface-similarity matrix.
 
 | Embedding model | Mantel correlation (r) | Reported p-value |
 |---|---:|---:|
 | Skip-gram | 0.8407 | 0.0001 |
 | CBOW | 0.8188 | 0.0004 |
 
-These are the reported results from the current analysis. Their interpretation depends on the construction of the surface-similarity matrix and the validity of the underlying preprocessing and statistical assumptions.
+The correlation is strong in the reported analysis. However, the exact construction of the surface-similarity matrix should be verified in the code and documented, including its input text and formula. If it is based on orthographic or character-level overlap, the correlation may partly reflect surface-form similarities also present in the embedding input; it should not be interpreted as independent evidence of semantic or genealogical relationships.
 
-Geographical comparisons are not presented as final findings because the geographical coordinates used in the current analysis require verification.
+Geographical comparisons are **pending verification** because the coordinates used in the current analysis were marked as placeholders. They are not presented as final findings.
 
----
+## Visualizations
 
-## 🖼️ Visualizations
+The following image links assume the image files are stored in the `figures/` directory. If the files are in the repository root instead, update the paths to match their actual locations.
 
-The repository includes visualizations generated during the main experiments.
-
-### Skip-gram Similarity Heatmap
-
-The heatmap illustrates the pairwise similarity structure obtained from the Skip-gram language representations.
+### Skip-gram similarity heatmap
 
 ![Skip-gram Similarity Heatmap](figures/heatmap_skipgram.png)
 
-### CBOW Similarity Heatmap
-
-The heatmap illustrates the pairwise similarity structure obtained from the CBOW language representations.
+### CBOW similarity heatmap
 
 ![CBOW Similarity Heatmap](figures/heatmap_cbow.png)
 
-### Skip-gram Hierarchical Clustering
-
-The dendrogram visualizes the hierarchical grouping structure derived from the Skip-gram representations.
+### Skip-gram dendrogram
 
 ![Skip-gram Dendrogram](figures/dendrogram_skipgram.png)
 
-### CBOW Hierarchical Clustering
-
-The dendrogram visualizes the hierarchical grouping structure derived from the CBOW representations.
+### CBOW dendrogram
 
 ![CBOW Dendrogram](figures/dendrogram_cbow.png)
 
----
-
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 indigenous-language-similarity-family-recovery-bangladesh/
-│
 ├── README.md
 ├── ids_project.R
-│
 ├── results/
 │   ├── similarity_matrix_skipgram.csv
 │   ├── similarity_matrix_cbow.csv
 │   └── edit_distance_baseline_matrix.csv
-│
 └── figures/
     ├── heatmap_skipgram.png
     ├── heatmap_cbow.png
@@ -312,105 +147,45 @@ indigenous-language-similarity-family-recovery-bangladesh/
     └── dendrogram_cbow.png
 ```
 
-### File Descriptions
+This is the intended structure. Keep only filenames that actually exist in the repository, and make sure the figure paths above match the uploaded files.
 
-| File or folder | Description |
-|---|---|
-| `README.md` | Project overview, methodology, results, and documentation |
-| `ids_project.R` | Main R analysis script |
-| `results/` | Exported similarity matrices and baseline results |
-| `figures/` | Visualizations from the analysis |
+## Limitations
 
-The raw dataset is intentionally excluded from this public repository.
+- **Small and uneven corpora:** Each Indigenous language has a limited number of records, and corpus sizes differ across languages. With `min_count = 1`, rare words may have poorly estimated embeddings.
+- **Text preprocessing:** Unicode handling, transcription conventions, duplicates, and orthographic differences can affect similarity. Preprocessing must preserve the scripts used by the included languages.
+- **Cross-language comparability:** Training in a shared space does not automatically make all cross-language vectors semantically aligned. Shared scripts, transliteration, paired Bangla/English reference text, and overlapping surface forms may inflate some similarities.
+- **Language-level aggregation:** Averaging word vectors can hide variation within a language and depends on which words are included and how they are weighted.
+- **Genealogical claims:** Similarity and clustering are exploratory signals, not proof of language-family membership.
+- **Geographical analysis:** Geographic results should not be interpreted until the coordinates are verified.
+- **Reproducibility:** The raw dataset is not public, so the repository alone is insufficient to reproduce every reported numerical result.
 
----
+## Future Work
 
-## 🛠️ Technologies Used
+- Validate findings with linguistic experts and trusted linguistic classifications.
+- Improve Unicode-aware preprocessing and verify text normalization.
+- Compare against character-level and multilingual embedding baselines.
+- Test clustering stability across seeds and cluster counts.
+- Increase and balance the corpus where reliable data are available.
+- Verify geographic metadata before conducting geographic comparisons.
+- Evaluate results on independently collected data.
 
-- **R** — Data processing and analysis
-- **Word2Vec** — Word embedding generation
-- **Skip-gram** — Context-based embedding architecture
-- **CBOW** — Context-prediction embedding architecture
-- **Cosine Similarity** — Pairwise vector similarity
-- **Hierarchical Clustering** — Exploratory grouping of language representations
-- **Adjusted Rand Index (ARI)** — Clustering evaluation
-- **Mantel Test** — Comparison of similarity matrices
-- **Data Visualization** — Heatmaps and dendrograms
+## Reproducibility
 
-The main analysis was run using R 4.6.1 on Windows.
+The main analysis script is `ids_project.R`. To rerun the analysis, prepare the input dataset locally and update the script's input path as needed. The raw dataset is not included in this repository, so results cannot be reproduced from the public repository alone.
 
----
+## Citation
 
-## ⚠️ Limitations
+If you use or refer to this project, cite it as:
 
-Several limitations should be considered when interpreting the results.
+> Akter, Sourovi. *Exploratory Indigenous Language Similarity Analysis in Bangladesh: A Word2Vec-Based Study of Language Similarity and Potential Family Recovery.* GitHub repository.
 
-1. **Dataset coverage:** The dataset represents the collected web-scraped material and may not capture the full linguistic diversity of the selected languages.
+## Author
 
-2. **Data quality:** Text normalization, transcription conventions, duplicate handling, and orthographic differences can affect similarity estimates.
+**Sourovi Akter**
 
-3. **Embedding alignment:** Language-level vectors derived from a shared training procedure do not automatically guarantee that all cross-language similarities have a clear semantic interpretation.
+## Data and Usage Notice
 
-4. **Genealogical interpretation:** Computational similarity alone cannot establish linguistic ancestry or prove that two languages belong to the same language family.
-
-5. **Baseline comparison:** Edit-distance results depend on how lexical items are matched, normalized, and compared.
-
-6. **Geographical analysis:** Geographical coordinates must be verified before geographical similarity results can be interpreted as final findings.
-
-7. **Reproducibility:** Exact reproduction requires access to the same dataset, preprocessing procedure, software environment, and model configuration.
-
-These limitations motivate further validation using linguistically verified resources and additional independent data.
-
----
-
-## 🔬 Future Work
-
-Potential extensions of this project include:
-
-- Validating the similarity patterns with expert linguistic knowledge
-- Improving Unicode-aware preprocessing for all included writing systems
-- Evaluating character-level and multilingual embedding baselines
-- Testing clustering stability across different random seeds and cluster counts
-- Investigating the effect of corpus size and data balance
-- Verifying geographical metadata before performing geographical comparisons
-- Evaluating the robustness of similarity patterns on independently collected data
-- Exploring whether the observed computational relationships agree with established linguistic classifications
-
----
-
-## 🔁 Reproducibility
-
-The main analysis script is provided in this repository.
-
-To reproduce the experiments, users will need to prepare the dataset locally and configure the script to read the appropriate input file.
-
-The raw dataset is not publicly included. Therefore, the repository alone does not provide everything required to reproduce the numerical results from scratch.
-
-Reproduction may also depend on the R version and the packages used by the script.
-
----
-
-## 📜 Data and Usage Notice
-
-This repository provides code, selected results, and visualizations for educational and research purposes.
-
-The raw dataset is maintained separately and is not publicly distributed through this repository.
-
-Users should verify the applicable source terms and permissions before collecting, redistributing, or reusing web-scraped language data.
-
-The code and exported results should be interpreted in the context of the methodology and limitations documented above.
-
----
-
-## 👩‍💻 Project Information
-
-**Project:** Indigenous Language Similarity and Family Recovery in Bangladesh
-
-**Primary methods:** Word2Vec, cosine similarity, hierarchical clustering, and lexical edit-distance comparison
-
-**Implementation language:** R
-
-**Focus:** Computational exploration of indigenous language similarity in Bangladesh
+This repository shares project code, selected results, and visualizations for educational and research purposes. The raw scraped dataset is not publicly distributed here. Check source terms and permissions before collecting, reusing, or redistributing scraped material.
 
 ---
 
