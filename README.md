@@ -79,6 +79,10 @@ Language-level vectors are formed by aggregating word embeddings. Results depend
 The clustering performance of Skip-gram and CBOW was evaluated
 using the Adjusted Rand Index (ARI) against three known language
 families.
+The reference family labels were Indo-Aryan (Chakma and Hajong),
+Sino-Tibetan (Marma, Garo, Kokborok, and Mro), and Austroasiatic
+(Santali and Khasi). The ARI measures agreement between the
+predicted clusters and these reference labels.
 
 | Method | ARI | Observation |
 |---|---:|---|
