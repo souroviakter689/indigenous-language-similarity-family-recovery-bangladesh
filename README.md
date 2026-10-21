@@ -206,22 +206,33 @@ The results are exploratory and should not be interpreted as definitive linguist
 
 The following results summarize the reported main experiments.
 
-### 1. Clustering Performance
+### 1. Clustering Performance and Stability
 
-The Adjusted Rand Index (ARI) was used to evaluate clustering agreement with the reference labels used in the analysis.
+The Adjusted Rand Index (ARI) was used to evaluate clustering
+agreement with the reference labels used in the analysis.
 
-| Method | ARI |
+| Method | Reported ARI |
 |---|---:|
 | Word2Vec Skip-gram | 0.6067 |
 | Word2Vec CBOW | 0.6067 |
 | Corrected edit-distance baseline | 0.3000 |
 
-The reported results show that both Word2Vec architectures achieved the same ARI in the main clustering experiment.
+Both Word2Vec architectures achieved a reported ARI of 0.6067
+in the main clustering experiment. However, the same ARI value
+does not imply equivalent stability across random seeds.
 
-The corrected edit-distance baseline produced a lower ARI in this comparison.
+**Stability consideration:** Skip-gram exhibited seed sensitivity
+in the cluster-count experiments. Its intermediate-k results
+should therefore be interpreted cautiously and should not be
+assumed to generalize across random seeds.
 
-These values describe agreement with the selected reference labels. They do not independently establish the true genealogical relationships among the languages.
+CBOW was expected to be more stable in the reported analysis;
+however, this interpretation should be supported by explicit
+multi-seed evaluation before making a definitive stability claim.
 
+The ARI values represent agreement with the selected reference
+labels and do not independently establish genealogical language
+relationships.
 ### 2. Selected Similarity Findings
 
 The following pairs were reported in the main similarity analysis.
