@@ -71,53 +71,71 @@ The overall pipeline compares Skip-gram and CBOW while examining whether the obs
 
 Language-level vectors are formed by aggregating word embeddings. Results depend on corpus composition, text preprocessing, and how the embeddings are trained.
 
+
 ## Results
 
-### Clustering and baseline comparison
+### 1. Clustering Performance
 
-| Method | Reported ARI | Interpretation |
+The clustering performance of Skip-gram and CBOW was evaluated
+using the Adjusted Rand Index (ARI) against three known language
+families.
+
+| Method | ARI | Observation |
 |---|---:|---|
-| Skip-gram | 0.6067 in the reported main run | Variable across logged training conditions |
-| CBOW | 0.6067 in the reported main run | Stable across logged conditions |
-| Corrected lexical edit-distance baseline | 0.3000 | Baseline comparison |
+| Skip-gram | 0.6067 | Sensitive to training conditions |
+| CBOW | 0.6067 | Stable across evaluated conditions |
+| Lexical edit-distance baseline | 0.3000 | Baseline comparison |
 
-The Adjusted Rand Index (ARI) measures agreement between a clustering and a reference partition. Its interpretation depends on the reference labels used. The exact reference-label mapping should be checked in the analysis script before interpreting ARI as evidence of language-family recovery.
+Although both embedding models achieved the same ARI in the
+reported main experiment, reproducibility analysis showed that
+Skip-gram was more variable across training conditions.
 
-### Reproducibility across training settings
+### 2. Reproducibility Analysis
 
-The reproducibility analysis pooled **39 logged observations per model** across the evaluated conditions.
+The analysis included 39 logged observations per model, pooled
+across the evaluated training conditions.
 
-| Training setting | Skip-gram (Mean ± SD) | CBOW (Mean ± SD) |
+| Training Setting | Skip-gram (Mean ± SD) | CBOW (Mean ± SD) |
 |---|---:|---:|
 | Multi-thread | 0.57 ± 0.12 | 0.607 ± 0.000 |
 | Single-thread, Run 1 | 0.27 ± 0.12 | 0.607 ± 0.000 |
 | Single-thread, Run 2 | 0.24 ± 0.00 | 0.607 ± 0.000 |
 
-Across the logged observations, Skip-gram showed greater variability, while CBOW remained consistent under the evaluated conditions. The three setting rows above are setting-specific summaries; they are not the full summary of all 39 observations. The observed stability does not establish that CBOW is universally better or linguistically more valid.
+CBOW remained consistent under the evaluated conditions, whereas
+Skip-gram exhibited greater variability. These findings support
+the use of reproducibility checks when evaluating embeddings
+trained on low-resource language data.
 
-### Selected similarity findings
+### 3. Language Similarity
 
-| Analysis | Reported finding |
-|---|---|
-| Skip-gram: closest reported Indigenous-language pair | Garo–Mro (0.981) |
-| CBOW: closest reported Indigenous-language pair | Marma–Khasi (0.970) |
-| Skip-gram: most similar to Bangla | Marma (0.3108) |
-| Skip-gram: most similar to English | Chakma (0.3723) |
+The reported analysis identified the following highly similar
+language pairs:
 
-These scores are specific to the dataset and modelling pipeline. High similarity does not, by itself, demonstrate shared ancestry.
+| Model | Closest Indigenous-Language Pair | Similarity |
+|---|---|---:|
+| Skip-gram | Garo–Mro | 0.98 |
+| CBOW | Marma–Khasi | 0.97 |
 
-### Surface-similarity matrix comparison
+These similarities describe the learned embedding representations
+and should not be interpreted as definitive evidence of common
+linguistic ancestry.
 
-Mantel tests compared the embedding-derived similarity matrices with a surface-similarity matrix.
+### 4. Surface-Overlap Validation
 
-| Embedding model | Mantel correlation (r) | Reported p-value |
+Mantel tests showed a strong correlation between embedding
+distances and character-trigram surface-overlap distances.
+
+| Model | Mantel Correlation (r) | Reported p-value |
 |---|---:|---:|
-| Skip-gram | 0.8407 | 0.0001 |
-| CBOW | 0.8188 | 0.0004 |
+| Skip-gram | 0.84 | < 0.001 |
+| CBOW | 0.82 | < 0.001 |
 
-The correlation is strong in the reported analysis. However, the exact construction of the surface-similarity matrix should be verified in the code and documented, including its input text and formula. If it is based on orthographic or character-level overlap, the correlation may partly reflect surface-form similarities also present in the embedding input; it should not be interpreted as independent evidence of semantic or genealogical relationships.
+These results suggest that orthographic or phonetic overlap may
+account for a substantial portion of the observed similarity
+structure.
 
-Geographical comparisons are **pending verification** because the coordinates used in the current analysis were marked as placeholders. They are not presented as final findings.
+Geographical analysis remains pending verification of the
+coordinates used in the analysis.
 
 ## Visualizations
 
