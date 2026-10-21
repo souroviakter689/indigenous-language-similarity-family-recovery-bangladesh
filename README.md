@@ -40,14 +40,18 @@ The raw dataset is **not included** in this public repository. Before redistribu
 
 ## Methodology
 
-1. Collect and organize multilingual text.
-2. Clean and normalize text and remove duplicates.
-3. Train Word2Vec models using **Skip-gram** and **CBOW**.
-4. Aggregate word embeddings into language-level representations.
-5. Calculate pairwise cosine similarities.
-6. Apply hierarchical clustering using average linkage, with three clusters in the main comparison.
-7. Compare embedding-based patterns with a lexical edit-distance baseline.
-8. Evaluate clustering agreement and compare similarity matrices using Mantel tests.
+The project follows a computational pipeline to explore linguistic similarities among eight Indigenous languages of Bangladesh, with Bangla and English as reference languages.
+
+1. **Data Collection:** Collected and organized multilingual text data through web scraping.
+2. **Preprocessing:** Cleaned the text, removed duplicates, and prepared the corpus for analysis.
+3. **Word Embedding:** Trained Word2Vec models using Skip-gram and CBOW architectures.
+4. **Language Representation:** Aggregated word embeddings to construct language-level vectors.
+5. **Similarity Analysis:** Used cosine similarity to measure relationships between language representations.
+6. **Clustering:** Applied hierarchical clustering with average linkage to explore potential language groupings.
+7. **Baseline Comparison:** Compared embedding-based results with a lexical edit-distance baseline.
+8. **Evaluation:** Used the Adjusted Rand Index (ARI) to evaluate clustering agreement and Mantel tests to compare similarity matrices.
+
+The methodology is exploratory and aims to identify potential similarity patterns rather than establish definitive linguistic classifications.
 
 ### Main Word2Vec settings
 
