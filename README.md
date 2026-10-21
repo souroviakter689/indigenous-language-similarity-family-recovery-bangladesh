@@ -1,90 +1,86 @@
-# Language Similarity and Family Recovery in Low-Resource Indigenous Languages of Bangladesh
+# Indigenous Language Similarity and Family Recovery in Bangladesh
 
-### Self-Trained Word Embeddings, Linguistic Validation, and Surface-Overlap Analysis
+An R-based machine learning project exploring language similarity and linguistic family patterns among eight Indigenous languages of Bangladesh using self-trained Word2Vec embeddings.
 
 ## Overview
 
-This research investigates language similarity and linguistic family recovery among eight Indigenous languages of Bangladesh using self-trained Word2Vec embeddings.
+This project uses Word2Vec to analyze similarities among Chakma, Marma, Garo, Kokborok, Santali, Khasi, Mro, and Hajong.
 
-The study compares two Word2Vec training objectives, Skip-gram and Continuous Bag of Words (CBOW), to investigate whether distributional representations learned from a multilingual corpus can recover known linguistic groupings.
+It combines Skip-gram and CBOW embeddings with cosine similarity, hierarchical clustering, and linguistic-family validation to explore patterns among these languages.
 
-Beyond embedding-based similarity, the research evaluates clustering against known linguistic families and compares the learned representations with a character-based edit-distance baseline.
+The project also includes an edit-distance baseline, character-level surface-overlap analysis, and geographic-distance comparison.
 
-The study also investigates the relationship between embedding distances, character-level surface overlap, and geographic distances. These analyses help examine whether the observed similarities reflect meaningful linguistic structure or are influenced by orthographic and phonetic overlap.
+## Features
 
-The overall objective is to assess the usefulness, limitations, and reproducibility of self-trained word embeddings for low-resource Indigenous language analysis.
+- Dataset preprocessing and text normalization
+- Self-trained Word2Vec embeddings
+- Skip-gram and CBOW model comparison
+- Language-level embedding generation
+- Cosine similarity matrices
+- Hierarchical clustering
+- Linguistic-family evaluation using Adjusted Rand Index (ARI)
+- Levenshtein edit-distance baseline
+- Character-trigram surface-overlap analysis
+- Geographic-distance validation
+- Similarity heatmaps, dendrograms, and PCA visualizations
 
----
+## Languages
 
-## Research Objectives
+**Indigenous languages**
+- Chakma
+- Marma
+- Garo
+- Kokborok
+- Santali
+- Khasi
+- Mro
+- Hajong
 
-The study addresses the following objectives:
+**Reference languages**
+- Bangla
+- English
 
-1. **Embedding Comparison:** Compare Skip-gram and CBOW using their ability to recover known linguistic groupings.
+## Technologies Used
 
-2. **Language Similarity:** Construct cosine similarity matrices to investigate relationships among Indigenous languages, Bangla, and English.
+- R
+- Word2Vec
+- Skip-gram
+- Continuous Bag of Words (CBOW)
+- Cosine Similarity
+- Hierarchical Clustering
+- Adjusted Rand Index
+- Levenshtein Edit Distance
+- Mantel Test
+- PCA and Data Visualization
 
-3. **Linguistic Family Recovery:** Evaluate hierarchical clustering against predefined linguistic-family labels using the Adjusted Rand Index (ARI).
+## Project Workflow
 
-4. **Baseline Comparison:** Compare embedding-based clustering with a non-embedding edit-distance baseline.
+1. **Data Preprocessing:** Clean sentence records, normalize text, and remove duplicates.
+2. **Corpus Construction:** Combine Indigenous-language sentences with unique Bangla and English reference sentences.
+3. **Embedding Training:** Train Skip-gram and CBOW Word2Vec models from scratch.
+4. **Language Representation:** Generate sentence embeddings through average pooling and aggregate them into language-level vectors.
+5. **Similarity Analysis:** Calculate cosine similarity between language vectors.
+6. **Clustering:** Apply average-linkage hierarchical clustering.
+7. **Evaluation:** Compare clustering assignments with predefined linguistic-family labels using ARI.
+8. **Baseline Comparison:** Evaluate a normalized Levenshtein edit-distance baseline.
+9. **Validation:** Examine character-trigram overlap and geographic-distance relationships.
+10. **Visualization:** Generate heatmaps, dendrograms, and PCA plots.
 
-5. **Surface-Overlap Analysis:** Investigate whether character-level orthographic or phonetic overlap is associated with embedding-based similarity.
-
-6. **Geographic Validation:** Examine the relationship between geographic distance and embedding distance using a permutation-based Mantel test.
-
-7. **Reproducibility:** Document the experimental configuration, preprocessing decisions, and validation procedures required to reproduce the reported findings.
-
----
-
-## Languages Covered
-
-The study includes eight Indigenous languages of Bangladesh.
-
-| Language | Role |
-|---|---|
-| Chakma | Indigenous language |
-| Marma | Indigenous language |
-| Garo | Indigenous language |
-| Kokborok | Indigenous language |
-| Santali | Indigenous language |
-| Khasi | Indigenous language |
-| Mro | Indigenous language |
-| Hajong | Indigenous language |
-| Bangla | Reference language |
-| English | Reference language |
-
-The Indigenous languages are evaluated against predefined linguistic-family labels used in the clustering analysis.
-
-These labels are treated as evaluation references rather than conclusions established by the embedding models.
-
----
-
-## Dataset Description
+## Dataset
 
 The dataset contains parallel Bangla, English, and Indigenous-language sentences.
 
-### Dataset structure
-
-| Column | Description |
-|---|---|
-| `Bangla` | Bangla reference sentence |
-| `English` | English reference sentence |
-| `Indigenous` | Sentence in an Indigenous language |
-| `Language` | Corresponding Indigenous-language label |
-
-### Dataset statistics
-
-| Statistic | Reported value |
+| Dataset Information | Value |
 |---|---:|
-| Original rows | 5,906 |
-| Rows after preprocessing | 5,842 |
-| Number of Indigenous languages | 8 |
+| Original records | 5,906 |
+| Records after preprocessing | 5,842 |
+| Indigenous languages | 8 |
 | Unique Bangla sentences | 786 |
 | Unique English sentences | 810 |
 
-### Language-wise record counts after preprocessing
+### Language-wise Records
 
-| Language | Number of records |
+| Language | Records |
 |---|---:|
 | Chakma | 543 |
 | Garo | 736 |
@@ -94,120 +90,17 @@ The dataset contains parallel Bangla, English, and Indigenous-language sentences
 | Marma | 800 |
 | Mro | 697 |
 | Santali | 767 |
-| **Total** | **5,842** |
 
-### Dataset source
+**Dataset source:** Multiling Cloud.
 
-The dataset was collected from Multiling Cloud.
+Dataset access and redistribution are subject to the original source's terms.
 
-Dataset redistribution and public availability must comply with the original source's terms. Dataset access instructions will be provided in `data/README.md`.
-
----
-
-## Methodology
-
-The research pipeline consists of the following stages.
-
-### 1. Data Preprocessing
-
-The original dataset is processed to remove incomplete and empty records, standardize text formatting, retain the eight target Indigenous languages, and remove exact duplicate sentence records.
-
-The resulting dataset contains 5,842 records.
-
-Bangla and English reference sentences are separately deduplicated before constructing the Word2Vec training corpus to reduce repeated contributions from parallel translations.
-
-### 2. Multilingual Training Corpus
-
-The training corpus combines:
-
-- Indigenous-language sentences
-- Unique Bangla reference sentences
-- Unique English reference sentences
-
-The objective is to train both embedding models in a shared vocabulary and representation space.
-
-### 3. Word2Vec Training
-
-Two Word2Vec architectures are trained from scratch:
-
-- Skip-gram
-- Continuous Bag of Words (CBOW)
-
-The models are trained on the combined corpus rather than using pretrained multilingual sentence-embedding models.
-
-Consequently, this study compares Word2Vec training objectives; it does not constitute a direct comparison of pretrained SBERT, mBERT, or XLM-R models.
-
-### 4. Sentence and Language Representations
-
-Sentence representations are constructed by averaging the embeddings of available tokens.
-
-Language-level representations are then obtained by averaging the sentence representations for each language.
-
-This produces one language vector for each of the eight Indigenous languages, Bangla, and English.
-
-### 5. Cosine Similarity
-
-Cosine similarity is calculated between the resulting language vectors.
-
-Separate similarity matrices are generated for Skip-gram and CBOW.
-
-These matrices are used to investigate pairwise language relationships and identify the most similar Indigenous language to each reference language.
-
-### 6. Hierarchical Clustering
-
-Hierarchical clustering is performed using average linkage.
-
-The number of clusters is set to three for the linguistic-family recovery experiment.
-
-The resulting clusters are compared against predefined linguistic-family labels.
-
-### 7. Linguistic Validation Using ARI
-
-The Adjusted Rand Index (ARI) measures agreement between the clustering assignments and the reference family labels.
-
-ARI is used to compare:
-
-- Skip-gram embeddings
-- CBOW embeddings
-- Edit-distance baseline
-
-### 8. Edit-Distance Baseline
-
-A non-embedding baseline is constructed using normalized Levenshtein edit distances between aligned Indigenous-language sentence pairs.
-
-Sentence pairs are aligned through their shared Bangla source sentences.
-
-The resulting language-level distance matrix is clustered using the same average-linkage procedure, and the clustering is evaluated using ARI.
-
-The corrected implementation removes duplicate Bangla keys before joining language-specific records.
-
-### 9. Surface-Overlap Analysis
-
-Character-trigram profiles are constructed for the Indigenous-language corpora.
-
-Cosine-based character-trigram distances are compared with the embedding distance matrices using Spearman Mantel tests with 9,999 permutations.
-
-This analysis examines whether the learned representations track orthographic or phonetic surface overlap.
-
-### 10. Geographic Validation
-
-Geographic distances between representative language locations are compared with embedding distances using Spearman Mantel tests with 9,999 permutations.
-
-The interpretation of this analysis depends on the validity and representativeness of the geographic coordinates.
-
-The coordinates must be independently verified before the results are treated as final geographic evidence.
-
----
-
-## Experimental Configuration
-
-The reported R implementation uses the following configuration.
+## Model Configuration
 
 | Parameter | Value |
 |---|---|
-| Programming language | R |
-| Embedding architecture | Skip-gram and CBOW |
-| Embedding dimension | 100 |
+| Embedding models | Skip-gram and CBOW |
+| Embedding dimensions | 100 |
 | Context window | 5 |
 | Training iterations | 20 |
 | Minimum word count | 1 |
@@ -215,19 +108,12 @@ The reported R implementation uses the following configuration.
 | Clustering algorithm | Hierarchical clustering |
 | Linkage method | Average linkage |
 | Number of clusters | 3 |
-| Surface-overlap test | Spearman Mantel test |
-| Geographic validation | Spearman Mantel test |
-| Permutations | 9,999 |
 
-These values describe the documented run configuration. The final repository script should be checked to ensure that it uses the same settings.
+These settings reflect the current documented implementation.
 
----
+## Results
 
-## Experimental Results
-
-### 1. Linguistic Family Recovery
-
-The reported ARI results are:
+The current project results include the following reported ARI scores:
 
 | Method | ARI |
 |---|---:|
@@ -235,91 +121,52 @@ The reported ARI results are:
 | CBOW | 0.6067 |
 | Corrected edit-distance baseline | 0.3000 |
 
-Both embedding models achieve the same reported ARI.
+Both embedding models achieve the same reported ARI, while the corrected edit-distance baseline achieves a lower score.
 
-The embedding-based approaches therefore outperform the corrected edit-distance baseline in this clustering evaluation, while neither Skip-gram nor CBOW demonstrates superiority over the other based on ARI alone.
-
-The ARI measures agreement with the chosen reference labels; it does not independently establish the historical or genealogical relationships among languages.
-
-### 2. Similarity to Bangla and English
+### Language Similarity
 
 The reported Skip-gram results identify:
 
-| Reference language | Most similar Indigenous language | Cosine similarity |
+| Reference Language | Most Similar Indigenous Language | Cosine Similarity |
 |---|---|---:|
 | Bangla | Marma | 0.3108 |
 | English | Chakma | 0.3723 |
 
-These values describe the learned language-level representations in the current experimental setup.
+The highest reported Indigenous-language pair similarities are:
 
-They should not be interpreted as definitive measures of semantic similarity or genealogical relatedness.
-
-### 3. Most Similar Indigenous-Language Pairs
-
-The reported pairwise similarity analysis identifies the following high-similarity pairs:
-
-| Model | Language pair | Cosine similarity |
+| Model | Language Pair | Cosine Similarity |
 |---|---|---:|
 | Skip-gram | Garo–Mro | 0.981 |
 | CBOW | Marma–Khasi | 0.970 |
 
-The similarities indicate that the learned language vectors are close in the respective embedding spaces.
+These similarities describe the learned embedding space and should not be interpreted as definitive proof of genealogical relationships.
 
-However, high cosine similarity does not, by itself, prove that two languages belong to the same family. Shared orthographic patterns, phonetic overlap, corpus composition, and training characteristics may influence these values.
+### Surface-Overlap Analysis
 
-### 4. Surface-Overlap Validation
-
-Character-trigram distances are compared with embedding distances using Mantel tests.
-
-| Model | Mantel correlation (r) | p-value |
+| Model | Mantel Correlation | p-value |
 |---|---:|---:|
 | Skip-gram | 0.8407 | 0.0001 |
 | CBOW | 0.8188 | 0.0004 |
 
-Both reported correlations are positive and statistically significant.
+The reported results indicate strong associations between character-trigram distances and embedding distances. This suggests that orthographic or phonetic surface overlap may influence the learned representations.
 
-The results indicate a strong association between character-level surface distances and embedding distances.
+### Geographic-Distance Analysis
 
-This is an important limitation of the study: the learned representations may substantially reflect orthographic or phonetic surface overlap rather than independent semantic or genealogical structure.
-
-### 5. Geographic Validation
-
-The reported geographic Mantel results are:
-
-| Model | Mantel correlation (r) | p-value |
+| Model | Mantel Correlation | p-value |
 |---|---:|---:|
 | Skip-gram | 0.1446 | 0.2286 |
 | CBOW | 0.1270 | 0.2534 |
 
-Neither reported correlation is statistically significant at the conventional 0.05 level.
+The reported geographic correlations are not statistically significant at the 0.05 level. Geographic coordinates require verification before these results can be treated as final.
 
-However, these results must be interpreted cautiously because the geographic coordinates require verification and may not adequately represent the distributions of the language communities.
-
-These values should not be treated as final validated geographic findings until the coordinate assignments have been checked.
-
-### 6. Summary of Reported Findings
-
-The current reported results suggest that:
-
-1. Both Skip-gram and CBOW achieve an ARI of 0.6067.
-2. The corrected edit-distance baseline achieves an ARI of 0.3000.
-3. Embedding distances show strong associations with character-trigram distances.
-4. The reported geographic Mantel correlations are not statistically significant.
-5. Surface-level orthographic or phonetic overlap is an important potential confound in interpreting embedding-based language similarity.
-
-The numerical findings must be kept consistent with the final, verified analysis outputs before publication of the repository.
-
----
+*Note: Numerical results should be checked against the final verified outputs before being treated as definitive.*
 
 ## Repository Structure
-
-The repository is organized as follows:
 
 ```text
 indigenous-language-similarity-family-recovery-bangladesh/
 │
 ├── README.md
-├── LICENSE
 ├── .gitignore
 │
 ├── R/
@@ -347,99 +194,50 @@ indigenous-language-similarity-family-recovery-bangladesh/
     └── reproducibility.md
 ```
 
-This structure describes the intended organization. Files should be added as they are generated and verified.
+This is the intended structure; files will be added as they become available and are verified.
 
-The research paper PDF is intentionally not included while the conference decision is pending.
+## Installation
 
----
+Install R and the required packages:
 
-## Requirements
-
-The R implementation uses packages including:
-
-- `word2vec`
-- `tidyverse`
-- `textclean`
-- `proxy`
-- `pheatmap`
-- `dendextend`
-- `mclust`
-- `geosphere`
-- `Rtsne`
-- `ggrepel`
-- `vegan`
-
-A compatible R installation and the required package versions are needed to reproduce the analysis.
-
----
+```r
+install.packages(c(
+  "word2vec",
+  "tidyverse",
+  "textclean",
+  "proxy",
+  "pheatmap",
+  "dendextend",
+  "mclust",
+  "geosphere",
+  "Rtsne",
+  "ggrepel",
+  "vegan"
+))
+```
 
 ## How to Run
 
-1. Install R.
+1. Clone or download this repository.
 2. Install the required R packages.
-3. Obtain the dataset according to the instructions in `data/README.md`.
-4. Place the dataset in the expected location or configure the dataset path.
-5. Open the R script in `R/`.
-6. Check the preprocessing and model configuration.
-7. Run the analysis.
-8. Inspect the generated similarity matrices, clustering assignments, ARI results, Mantel statistics, and figures.
+3. Obtain the dataset according to `data/README.md`.
+4. Configure the dataset path and input object in the R script.
+5. Run `R/ids_project.R`.
+6. Inspect the generated similarity matrices, clustering results, validation statistics, and visualizations.
 
-See `docs/reproducibility.md` for detailed instructions.
+See `docs/reproducibility.md` for additional instructions.
 
-The repository should only be described as fully reproducible after the complete pipeline has been tested from start to finish.
-
----
+The full pipeline should be considered reproducible only after it has been tested successfully from start to finish.
 
 ## Limitations
 
-Several limitations should be considered when interpreting the findings.
+- Learned similarities may reflect orthographic or phonetic overlap.
+- Language-level comparisons involve only eight Indigenous languages.
+- Geographic findings depend on the accuracy and representativeness of language-location assignments.
+- Clustering agreement with predefined family labels does not independently establish genealogical relationships.
 
-### Surface-Overlap Confounding
+## Project Status
 
-The strong association between character-trigram distances and embedding distances suggests that the learned representations may be substantially influenced by orthographic or phonetic patterns.
+Project development, experimental validation, and repository organization are ongoing.
 
-### Small Number of Language-Level Observations
-
-The clustering and Mantel analyses operate on eight Indigenous languages. Results based on this small number of language-level observations require cautious interpretation.
-
-### Geographic Representativeness
-
-A single representative location may not capture the full geographic distribution of a language community. Geographic findings depend on independently verified and appropriate location assignments.
-
-### Corpus and Training Effects
-
-Vocabulary coverage, sentence composition, tokenization, corpus size, and Word2Vec training characteristics may influence the resulting language vectors.
-
-### Interpretation of Linguistic Families
-
-Agreement with predefined family labels evaluates clustering consistency with those labels. It does not independently prove genealogical relationships or replace historical-linguistic evidence.
-
----
-
-## Data Availability
-
-The dataset was collected from Multiling Cloud.
-
-Access, use, and redistribution must comply with the original source's terms.
-
-The dataset is not included in this repository at this stage.
-
----
-
-## Research Paper
-
-The associated research paper is currently under conference consideration.
-
-The paper PDF is intentionally not included in this repository while the conference decision is pending.
-
----
-
-## Citation
-
-Citation information will be added when the final bibliographic details are available.
-
----
-
-## Acknowledgements
-
-The original dataset source and any external resources used in this research should be acknowledged in accordance with their respective terms.
+The associated paper is not included in this repository at this stage.
