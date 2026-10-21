@@ -111,23 +111,13 @@ Geographical comparisons are **pending verification** because the coordinates us
 
 ## Visualizations
 
-The following image links assume the image files are stored in the `figures/` directory. If the files are in the repository root instead, update the paths to match their actual locations.
+The following visualizations were generated during the analysis.
+Click on each link to view the corresponding figure.
 
-### Skip-gram similarity heatmap
-
-![Skip-gram Similarity Heatmap](figures/heatmap_skipgram.png)
-
-### CBOW similarity heatmap
-
-![CBOW Similarity Heatmap](figures/heatmap_cbow.png)
-
-### Skip-gram dendrogram
-
-![Skip-gram Dendrogram](figures/dendrogram_skipgram.png)
-
-### CBOW dendrogram
-
-![CBOW Dendrogram](figures/dendrogram_cbow.png)
+- [Skip-gram Similarity Heatmap](figures/heatmap_skipgram.png)
+- [CBOW Similarity Heatmap](figures/heatmap_cbow.png)
+- [Skip-gram Hierarchical Clustering Dendrogram](figures/dendrogram_skipgram.png)
+- [CBOW Hierarchical Clustering Dendrogram](figures/dendrogram_cbow.png)
 
 ## Repository Structure
 
